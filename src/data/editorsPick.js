@@ -1,0 +1,21 @@
+export const editorsPick=[
+    {
+        id:1,
+        title:"Men",
+        image:"/images/shopping-man.png"
+    },
+    {
+        id:2,
+        title:"Women",
+        image:"/images/stylish-woman.png"
+    },
+    {
+        id:3,
+        title:"Accessories",
+        image:"/images/accessories.png"
+    },{
+        id:4,
+        title:"Kids",
+        image:"/images/kids.png"
+    }
+]
