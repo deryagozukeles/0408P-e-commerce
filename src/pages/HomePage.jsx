@@ -4,6 +4,7 @@ import { Navigation } from "swiper/modules";
 import "swiper/css/navigation";
 import "../index.css";
 import EditorsPick from "../components/EditorsPick";
+import BestSellerProducts from "../components/BestSellerProducts";
 
 function HomePage(){
 return(
@@ -48,6 +49,7 @@ return(
         </SwiperSlide>
     </Swiper>
     <EditorsPick/>
+    <BestSellerProducts/>
 
    </section>
 )

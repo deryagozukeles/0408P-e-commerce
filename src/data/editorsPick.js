@@ -13,7 +13,8 @@ export const editorsPick=[
         id:3,
         title:"Accessories",
         image:"/images/accessories.png"
-    },{
+    },
+    {
         id:4,
         title:"Kids",
         image:"/images/kids.png"
