@@ -5,7 +5,7 @@ import ProductCard from "./ProductCard";
 function BestSellerProducts(){
     return(
         <section className="max-w-7xl mx-auto px-4 py-16">
-            <h3 className="text-center text-gray-300 mb-10">Featured Product</h3>
+           
             <h2 className="text-2xl font-bold text-center mb-2">
                 BESTSELLER PRODUCTS
             </h2>

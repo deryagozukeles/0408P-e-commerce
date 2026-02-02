@@ -4,7 +4,7 @@ import HomePage from "../pages/HomePage";
 function AppRouters(){
     return(
         <Switch>
-            <Route>
+            <Route path="/" exact>
                 <HomePage/>
             </Route>
         </Switch>

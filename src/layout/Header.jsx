@@ -5,7 +5,11 @@ import {
   User,
   Phone,
   Mail,
+  FacebookIcon,
+  InstagramIcon,
+  TwitterIcon
 } from "lucide-react";
+import { Link } from "react-router-dom";
 function Header(){
     return(
         <header className="w-full">
@@ -23,12 +27,11 @@ function Header(){
                 <div>
                    Fallow Us and get a change to win 80% off
                 </div>
-                <div className="flex items-center gap-4">
-                    <span>Follow Us:</span>
-                    <span>fb</span>
-                    <span>in</span>
-                    <span>tw</span>
-                </div>
+                <div className="flex gap-4">
+                        <FacebookIcon className="w-5 h-5 cursor-pointer hover:text-blue-500 transition" ></FacebookIcon>
+                        <InstagramIcon className="w-5 h-5 cursor-pointer hover:text-pink-500 transition" ></InstagramIcon>
+                        <TwitterIcon className="w-5 h-5 cursor-pointer hover:text-sky-500 transition" ></TwitterIcon>
+                     </div>
             </div>
             <div className="border-b">
                 <div className="flex items-center justify-between px-4 py-3 md:px-8">
@@ -39,12 +42,12 @@ function Header(){
                         Bandage
                     </div>
                     <nav className="hidden md:flex gap-6 text-sm">
-                        <a href="#">Home</a>
-                        <a href="#">Shop</a>
-                        <a href="#">About</a>
-                        <a href="#">Blog</a>
-                        <a href="#">Contact</a>
-                        <a href="#">Pages</a>
+                        <Link to="/">Home</Link>
+                        <Link to="/shop">Shop</Link>
+                        <Link to="/about">About</Link>
+                        <Link to="/blog">Blog</Link>
+                        <Link to="/contact">Contact</Link>
+                        <Link to="/pages">Pages</Link>
                     </nav>
                     <div className="flex items-center gap-4">
                         <Search size={18}/>

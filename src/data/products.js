@@ -1,3 +1,12 @@
+import product1 from "../assets/images/productsImage/product-1.png";
+import product2 from "../assets/images/productsImage/product-2.png";
+import product3 from "../assets/images/productsImage/product-3.png";
+import product4 from "../assets/images/productsImage/product-4.png";
+import product5 from "../assets/images/productsImage/product-5.png";
+import product6 from "../assets/images/productsImage/product-6.png";
+import product7 from "../assets/images/productsImage/product-7.png";
+import product8 from "../assets/images/productsImage/product-8.png";
+
 export const products=[
     {
         id:1,
@@ -5,7 +14,7 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product1.png"
+        image:product1
     },
      {
         id:2,
@@ -13,7 +22,7 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product2.png"
+        image: product2
     },
     {
         id:3,
@@ -21,7 +30,7 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product3.png"
+        image:product3
     },
     {
         id:4,
@@ -29,7 +38,7 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product4.png"
+        image:product4
     },
     {
         id:5,
@@ -37,7 +46,7 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product5.png"
+        image:product5
     },
     {
         id:6,
@@ -45,7 +54,7 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product6.png"
+        image:product6
     },
     {
         id:7,
@@ -53,7 +62,7 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product7.png"
+        image:product7
     },
     {
         id:8,
@@ -61,6 +70,6 @@ export const products=[
         category:"English Department",
         price:"$16.48",
         oldPrice:"$20.00",
-        image:"/images/productsImage/product8.png"
+        image:product8
     }
 ];
