@@ -7,9 +7,12 @@ import {
   Mail,
   FacebookIcon,
   InstagramIcon,
-  TwitterIcon
+  TwitterIcon,
+  YoutubeIcon,
+  HeartIcon
 } from "lucide-react";
-import { Link } from "react-router-dom";
+
+import { NavLink } from "react-router-dom";
 function Header(){
     return(
         <header className="w-full">
@@ -29,6 +32,7 @@ function Header(){
                 </div>
                 <div className="flex gap-4">
                         <FacebookIcon className="w-5 h-5 cursor-pointer hover:text-blue-500 transition" ></FacebookIcon>
+                        <YoutubeIcon className="w-5 h-5 cursor-pointer hover:text-red-600 transition"></YoutubeIcon>
                         <InstagramIcon className="w-5 h-5 cursor-pointer hover:text-pink-500 transition" ></InstagramIcon>
                         <TwitterIcon className="w-5 h-5 cursor-pointer hover:text-sky-500 transition" ></TwitterIcon>
                      </div>
@@ -41,20 +45,43 @@ function Header(){
                     <div className="text-lg font-bold">
                         Bandage
                     </div>
-                    <nav className="hidden md:flex gap-6 text-sm">
-                        <Link to="/">Home</Link>
-                        <Link to="/shop">Shop</Link>
-                        <Link to="/about">About</Link>
-                        <Link to="/blog">Blog</Link>
-                        <Link to="/contact">Contact</Link>
-                        <Link to="/pages">Pages</Link>
-                    </nav>
-                    <div className="flex items-center gap-4">
-                        <Search size={18}/>
-                        <User size={18} className="hidden md:block"/>
-                        <ShoppingCart size={18}/>
+                     <nav className="hidden md:flex gap-6 text-sm">
+            {[
+              { path: "/", label: "Home" },
+              { path: "/shop", label: "Shop" },
+              { path: "/about", label: "About" },
+              { path: "/blog", label: "Blog" },
+              { path: "/contact", label: "Contact" },
+              { path: "/pages", label: "Pages" }
+            ].map((item) => (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-blue-500 font-semibold"
+                    : "text-gray-700 hover:text-blue-500 transition"
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
 
-                    </div>
+                    <div className="flex items-center gap-4 text-blue-500">
+            <NavLink
+              to="/login"
+              className="hidden md:flex items-center gap-1 text-sm hover:text-blue-700 transition"
+            >
+              <User size={24} />
+              Login / Register
+            </NavLink>
+
+            <Search size={18} className="cursor-pointer hover:text-blue-700 transition" />
+            <ShoppingCart size={18} className="cursor-pointer hover:text-blue-700 transition" />
+            <HeartIcon size={18} className="cursor-pointer hover:text-red-600 transition"/>
+          </div>
+
                 </div>
             </div>
         </header>
