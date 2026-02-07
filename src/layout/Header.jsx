@@ -46,27 +46,27 @@ function Header(){
                         Bandage
                     </div>
                      <nav className="hidden md:flex gap-6 text-sm">
-            {[
-              { path: "/", label: "Home" },
-              { path: "/shop", label: "Shop" },
-              { path: "/about", label: "About" },
-              { path: "/blog", label: "Blog" },
-              { path: "/contact", label: "Contact" },
-              { path: "/pages", label: "Pages" }
-            ].map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-blue-500 font-semibold"
-                    : "text-gray-700 hover:text-blue-500 transition"
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
+                        {[
+                          { path: "/", label: "Home" },
+                          { path: "/shop", label: "Shop" },
+                          { path: "/about", label: "About" },
+                          { path: "/blog", label: "Blog" },
+                          { path: "/contact", label: "Contact" },
+                          { path: "/pages", label: "Pages" }
+                        ].map((item) => (
+                          <NavLink
+                            key={item.path}
+                            to={item.path}
+                            className={({ isActive }) =>
+                              isActive
+                                ? "text-blue-500 font-semibold"
+                                : "text-gray-700 hover:text-blue-500 transition"
+                            }
+                          >
+                    {item.label}
+                  </NavLink>
+                ))}
+              </nav>
 
                     <div className="flex items-center gap-4 text-blue-500">
             <NavLink
@@ -79,7 +79,7 @@ function Header(){
 
             <Search size={18} className="cursor-pointer hover:text-blue-700 transition" />
             <ShoppingCart size={18} className="cursor-pointer hover:text-blue-700 transition" />
-            <HeartIcon size={18} className="cursor-pointer hover:text-red-600 transition"/>
+            <HeartIcon size={18} className="cursor-pointer hover:text-blue-700 transition"/>
           </div>
 
                 </div>

@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
+
 function ProductCard({product}){
     return(
+        <Link to={`/product/${product.id}`} >
         <div className="group border raunded-lg owerflow-hidden hover:shadow-lg transition">
             <img
                 src={product.image}
@@ -21,6 +24,7 @@ function ProductCard({product}){
                 </div>
             </div>
         </div>
+        </Link>
     );
 
 }
