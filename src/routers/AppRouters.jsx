@@ -3,6 +3,7 @@ import HomePage from "../pages/HomePage";
 import ShopPage from "../pages/ShopPage";
 import ProductDetail from "../pages/ProductDetail";
 import Contact from "../pages/Contact";
+import Team from "../pages/Team";
 
 function AppRouters(){
     return(
@@ -18,6 +19,9 @@ function AppRouters(){
             </Route>
             <Route path="/contact" >
                 <Contact/>
+            </Route>
+            <Route path="/team" >
+                <Team/>
             </Route>
         </Switch>
     )

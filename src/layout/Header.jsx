@@ -52,7 +52,7 @@ function Header(){
                           { path: "/about", label: "About" },
                           { path: "/blog", label: "Blog" },
                           { path: "/contact", label: "Contact" },
-                          { path: "/pages", label: "Pages" }
+                          { path: "/team", label: "Team" }
                         ].map((item) => (
                           <NavLink
                             key={item.path}
