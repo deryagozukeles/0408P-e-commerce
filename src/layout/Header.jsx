@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 function Header(){
     return(
         <header className="w-full">
@@ -43,7 +44,7 @@ function Header(){
                         <Menu size={24}/>
                     </button>
                     <div className="text-lg font-bold">
-                        Bandage
+                       <Link to="/">Bandage</Link> 
                     </div>
                      <nav className="hidden md:flex gap-6 text-sm">
                         {[

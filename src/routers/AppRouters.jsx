@@ -4,6 +4,7 @@ import ShopPage from "../pages/ShopPage";
 import ProductDetail from "../pages/ProductDetail";
 import Contact from "../pages/Contact";
 import Team from "../pages/Team";
+import AboutPage from "../pages/AboutPage";
 
 function AppRouters(){
     return(
@@ -22,6 +23,9 @@ function AppRouters(){
             </Route>
             <Route path="/team" >
                 <Team/>
+            </Route>
+            <Route path="/about" >
+                <AboutPage/>
             </Route>
         </Switch>
     )
