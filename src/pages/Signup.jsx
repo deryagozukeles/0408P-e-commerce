@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { AxiosInstance } from "../api/AxiosInstance";
+import { axiosInstance } from "src/api/axiosInstance";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Loader2 } from "lucide-react";
 
@@ -22,7 +22,7 @@ function Signup(){
     const selectedRoleId=watch('role_id');
     const password=watch("password");
     useEffect(()=>{
-        AxiosInstance.get('/roles').then((res)=>{
+        axiosInstance.get('/roles').then((res)=>{
             setRoles(res.data);
             const customerRole=res.data.find((role)=>role.code==='customer');
             if(customerRole) setValue('role_id',customerRole.id.toString());
@@ -45,7 +45,7 @@ function Signup(){
                 back_account:data.store_bank_account,
             };
         }
-        AxiosInstance.post('/signup',payload)
+        axiosInstance.post('/signup',payload)
         .then(()=>{
             toast.success('You need to click link in email to activate your account!');
             history.goBack();
