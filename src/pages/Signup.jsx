@@ -23,7 +23,7 @@ function Signup(){
     const selectedRoleId=watch('role_id');
     const password=watch("password");
     useEffect(()=>{
-        axiosInstanc.get('/roles').then((res)=>{
+        axiosInstance.get('/roles').then((res)=>{
             setRoles(res.data);
             const customerRole=res.data.find((role)=>role.code==='customer');
             if(customerRole) setValue('role_id',customerRole.id.toString());
