@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { axiosInstance } from "src/api/axiosInstance";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import  axiosInstance  from "../api/axiosInstance";
+
+import { useHistory } from "react-router-dom/";
 import { Loader2 } from "lucide-react";
 
 function Signup(){
@@ -22,7 +23,7 @@ function Signup(){
     const selectedRoleId=watch('role_id');
     const password=watch("password");
     useEffect(()=>{
-        axiosInstance.get('/roles').then((res)=>{
+        axiosInstanc.get('/roles').then((res)=>{
             setRoles(res.data);
             const customerRole=res.data.find((role)=>role.code==='customer');
             if(customerRole) setValue('role_id',customerRole.id.toString());
