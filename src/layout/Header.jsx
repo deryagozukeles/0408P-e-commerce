@@ -71,7 +71,7 @@ function Header(){
 
                     <div className="flex items-center gap-4 text-blue-500">
             <NavLink
-              to="/login"
+              to="/signup"
               className="hidden md:flex items-center gap-1 text-sm hover:text-blue-700 transition"
             >
               <User size={24} />

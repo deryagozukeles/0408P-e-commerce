@@ -5,6 +5,7 @@ import ProductDetail from "../pages/ProductDetail";
 import Contact from "../pages/Contact";
 import Team from "../pages/Team";
 import AboutPage from "../pages/AboutPage";
+import Signup from "../pages/Signup";
 
 function AppRouters(){
     return(
@@ -26,6 +27,9 @@ function AppRouters(){
             </Route>
             <Route path="/about" >
                 <AboutPage/>
+            </Route>
+            <Route path="/signup" >
+                <Signup/>
             </Route>
         </Switch>
     )
