@@ -6,6 +6,7 @@ import Contact from "../pages/Contact";
 import Team from "../pages/Team";
 import AboutPage from "../pages/AboutPage";
 import Signup from "../pages/Signup";
+import Login from "../pages/LoginPage";
 
 function AppRouters(){
     return(
@@ -30,6 +31,9 @@ function AppRouters(){
             </Route>
             <Route path="/signup" >
                 <Signup/>
+            </Route>
+            <Route path="/login" >
+                <Login/>
             </Route>
         </Switch>
     )
