@@ -7,6 +7,8 @@ import PageContent from './layout/PageContent'
 import Footer from './layout/Footer'
 import { useDispatch } from 'react-redux'
 import { fetchRolesIfNeeded } from './store/thunks/clientThunks'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -17,6 +19,17 @@ function App() {
 
   return (
     <>
+     <ToastContainer 
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Header/>
       <PageContent/>
       <Footer/>

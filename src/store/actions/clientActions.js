@@ -1,4 +1,4 @@
-import axiosInstance from "../api/axiosInstance";
+import axiosInstance from "../../api/axiosInstance";
 import {SET_USER,SET_ROLES,SET_THEME,SET_LANGUAGE} from "../reducers/clientReducer";
 export const setUser=(user)=>({type:SET_USER,payload:user});
 export const setRoles=(roles)=>({type:SET_ROLES,payload:roles});
