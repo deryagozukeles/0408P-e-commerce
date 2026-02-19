@@ -5,6 +5,7 @@ import { fetchProductDetail } from "../store/actions/productActions";
 import { Eye, Heart, ShoppingCart, ChevronRight, ArrowLeft } from "lucide-react";
 import BestSellerProducts from "../components/BestSellerProducts";
 import Brands from "../components/Brands";
+import { addToCart } from "../store/actions/shoppingCartActions";
 
 function ProductDetail() {
     const { productId } = useParams(); 
@@ -117,7 +118,9 @@ function ProductDetail() {
 
                    
                     <div className="flex gap-4 mt-6">
-                        <button className="bg-[#23A6F0] text-white px-8 py-3 rounded-md font-bold hover:bg-blue-600 transition shadow-md">
+                        <button 
+                            onClick={()=>dispatch(addToCart(activeProduct))}
+                            className="bg-[#23A6F0] text-white px-8 py-3 rounded-md font-bold hover:bg-blue-600 transition shadow-md">
                             Add to Cart
                         </button>
                         

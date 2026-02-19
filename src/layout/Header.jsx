@@ -15,7 +15,7 @@ import Gravatar from "react-gravatar";
 import { NavLink, Link } from "react-router-dom"; 
 import { useSelector } from "react-redux"; 
 function Header() {
- 
+ const { cart } = useSelector((state) => state.shoppingCart);
   const user = useSelector((state) => state.client.user);
   const { list } = useSelector((state) => state.categories);
   const womenCategories = list.filter((cat) => cat.gender === "k");
@@ -143,8 +143,68 @@ const menCategories = list.filter((cat) => cat.gender === "e");
             )}
 
             <Search size={18} className="cursor-pointer hover:text-blue-700 transition" />
-            <ShoppingCart size={18} className="cursor-pointer hover:text-blue-700 transition" />
-            <HeartIcon size={18} className="cursor-pointer hover:text-blue-700 transition" />
+            <div className="relative group">
+            <ShoppingCart
+              size={20}
+              className="cursor-pointer hover:text-blue-700 transition"
+            />
+
+            {cart.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {cart.reduce((total, item) => total + item.count, 0)}
+              </span>
+            )}
+
+            <div className="absolute right-0 mt-3 w-[380px] bg-white shadow-2xl rounded-xl p-4 hidden group-hover:block z-50">
+
+            
+              <h3 className="font-semibold text-gray-800 mb-4">
+                Sepetim ({cart.length} Ürün)
+              </h3>
+
+              <div className="max-h-72 overflow-y-auto space-y-4">
+                {cart.map((item) => (
+                  <div key={item.product.id} className="flex gap-3 border-b pb-3">
+
+                    <img
+                      src={item.product.images?.[0]?.url}
+                      alt={item.product.name}
+                      className="w-16 h-16 object-cover rounded-md border"
+                    />
+
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-800 line-clamp-2">
+                        {item.product.name}
+                      </p>
+
+                      <p className="text-xs text-gray-500 mt-1">
+                        Beden: {item.product.size || "Tek Beden"} Adet: {item.count}
+                      </p>
+
+                      <p className="text-orange-500 font-semibold mt-1">
+                        {item.product.price} TL
+                      </p>
+                    </div>
+
+                  </div>
+                ))}
+              </div>
+
+            
+              <div className="flex gap-3 mt-4">
+                <button className="flex-1 border rounded-lg py-2 text-gray-700 hover:bg-gray-100 transition">
+                  Sepete Git
+                </button>
+
+                <button className="flex-1 bg-orange-500 text-white rounded-lg py-2 hover:bg-orange-600 transition">
+                  Siparişi Tamamla
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+                      <HeartIcon size={18} className="cursor-pointer hover:text-blue-700 transition" />
           </div>
         </div>
       </div>
