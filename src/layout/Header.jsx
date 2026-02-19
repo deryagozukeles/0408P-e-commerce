@@ -17,7 +17,9 @@ import { useSelector } from "react-redux";
 function Header() {
  
   const user = useSelector((state) => state.client.user);
-
+  const { list } = useSelector((state) => state.categories);
+  const womenCategories = list.filter((cat) => cat.gender === "k");
+const menCategories = list.filter((cat) => cat.gender === "e");
   return (
     <header className="w-full">
       
@@ -52,27 +54,68 @@ function Header() {
             <Link to="/">Bandage</Link>
           </div>
 
-          <nav className="hidden md:flex gap-6 text-sm">
-            {[
-              { path: "/", label: "Home" },
-              { path: "/shop", label: "Shop" },
-              { path: "/about", label: "About" },
-              { path: "/blog", label: "Blog" },
-              { path: "/contact", label: "Contact" },
-              { path: "/team", label: "Team" }
-            ].map((item) => (
-              <NavLink
-                key={item.path}
-                to={item.path}
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-blue-500 font-semibold"
-                    : "text-gray-700 hover:text-blue-500 transition"
-                }
-              >
-                {item.label}
-              </NavLink>
-            ))}
+          <nav className="hidden md:flex gap-6 text-sm relative">
+  
+            <NavLink to="/" className="hover:text-blue-500 transition">
+              Home
+            </NavLink>
+
+            
+           <div className="group relative">
+  <NavLink
+    to="/shop"
+    className="hover:text-blue-500 transition"
+  >
+    Shop
+  </NavLink>
+
+  <div className="absolute left-0 top-full hidden group-hover:grid bg-white shadow-xl p-8 grid-cols-2 gap-16 z-50 min-w-[400px] border-t-2 border-blue-500">
+    
+    <div>
+      <h3 className="font-bold mb-4">Kadın</h3>
+      {womenCategories.map((cat) => (
+        <Link
+          key={cat.id}
+          to={`/shop/kadin/${cat.title.toLowerCase()}/${cat.id}`}
+          className="block text-gray-600 hover:text-blue-500 mb-2"
+        >
+          {cat.title}
+        </Link>
+      ))}
+    </div>
+
+    <div>
+      <h3 className="font-bold mb-4">Erkek</h3>
+      {menCategories.map((cat) => (
+        <Link
+          key={cat.id}
+          to={`/shop/erkek/${cat.title.toLowerCase()}/${cat.id}`}
+          className="block text-gray-600 hover:text-blue-500 mb-2"
+        >
+          {cat.title}
+        </Link>
+      ))}
+    </div>
+
+  </div>
+            </div>
+
+            <NavLink to="/about" className="hover:text-blue-500 transition">
+              About
+            </NavLink>
+
+            <NavLink to="/blog" className="hover:text-blue-500 transition">
+              Blog
+            </NavLink>
+
+            <NavLink to="/contact" className="hover:text-blue-500 transition">
+              Contact
+            </NavLink>
+
+            <NavLink to="/team" className="hover:text-blue-500 transition">
+              Team
+            </NavLink>
+
           </nav>
 
          

@@ -1,152 +1,168 @@
-import { useParams } from "react-router-dom";
-import { products } from "../data/products";
-import { Eye, Heart, ShoppingCart,ChevronRight } from "lucide-react";
+import { useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom"; // useNavigate yerine useHistory
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProductDetail } from "../store/actions/productActions"; 
+import { Eye, Heart, ShoppingCart, ChevronRight, ArrowLeft } from "lucide-react";
 import BestSellerProducts from "../components/BestSellerProducts";
 import Brands from "../components/Brands";
 
-function ProductDetail(){
-    const {id}= useParams();
-    const product=products.find((item)=>item.id===Number(id));
-    if(!product){
-        return <p>Ürün bulunamadı</p>
-    }
-    return(
+function ProductDetail() {
+    const { productId } = useParams(); 
+    const history = useHistory(); 
+    const dispatch = useDispatch();
+
+    
+    const { activeProduct, fetchState } = useSelector((state) => state.product);
+
+    useEffect(() => {
         
+        if (productId) {
+            dispatch(fetchProductDetail(productId));
+        }
+       
+        window.scrollTo(0, 0);
+    }, [productId, dispatch]);
+
+    
+    if (fetchState === "FETCHING") {
+        return (
+            <div className="flex flex-col justify-center items-center min-h-[600px]">
+                <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-blue-500"></div>
+                <p className="mt-4 text-gray-600 font-medium">Ürün detayları yükleniyor...</p>
+            </div>
+        );
+    }
+
+    
+    if (fetchState === "FAILED" || (!activeProduct && fetchState === "FETCHED")) {
+        return (
+            <div className="text-center py-20">
+                <p className="text-red-500 mb-4">Ürün bulunamadı veya bir hata oluştu.</p>
+                <button onClick={() => history.push("/shop")} className="text-blue-500 underline">
+                    Mağazaya Geri Dön
+                </button>
+            </div>
+        );
+    }
+
+    
+    if (!activeProduct) return null;
+
+    return (
         <main className="px-4 py-6 mx-auto md:px-16">
-            <section className="flex m-4 items-center gap-2 text-sm text-gray-400">
-                <span className="hover:text-gray-600 cursor-pointer">Home</span>
-                <ChevronRight size={14} />
+           
+            <div className="flex flex-col gap-4 mb-6 text-left">
+                
+                <button 
+                    onClick={() => history.goBack()} 
+                    className="flex items-center gap-2 text-blue-500 font-bold hover:text-blue-700 transition w-fit"
+                >
+                    <ArrowLeft size={20} /> Back
+                </button>
+                
+                <section className="flex items-center gap-2 text-sm text-gray-400">
+                    <span className="hover:text-gray-600 cursor-pointer" onClick={() => history.push("/")}>Home</span>
+                    <ChevronRight size={14} />
+                    <span className="hover:text-gray-600 cursor-pointer" onClick={() => history.push("/shop")}>Shop</span>
+                    <ChevronRight size={14} />
+                    <span className="text-gray-700 font-medium">
+                        {activeProduct.name}
+                    </span>
+                </section>
+            </div>
 
-                <span className="hover:text-gray-600 cursor-pointer">Shop</span>
-                <ChevronRight size={14} />
-
-                <span className="text-gray-700 font-medium">
-                    {product.title}
-                </span>
-            </section>
-            <div className="flex flex-col md:flex-row gap-2 text-left">
-                <div className="md:w-1/2 flex justify-center md:justify-start">
+           
+            <div className="flex flex-col md:flex-row gap-8 text-left">
+                
+                <div className="md:w-1/2 flex justify-center bg-gray-50 rounded-lg p-4">
                     <img
-                        src={product.image}
-                        title={product.title} 
-                        className="
-                        w-full
-                        max-w-[220px]
-                        sm:max-w-[260px]
-                        md:max-w-[320px]
-                        object-contain
-                        rounded
-                        "
+                        src={activeProduct.images?.[0]?.url} 
+                        alt={activeProduct.name} 
+                        className="w-full max-w-[450px] object-contain rounded shadow-sm"
                     /> 
                 </div>
+
+                
                 <div className="flex-1 flex flex-col gap-4">
-                <h1 className="text-xl font-semibold mb-2">{product.title}</h1>
-                <p className="text-gray-500 mb-4">{product.description}</p>
-                <span className="text-lg font-bold">{product.price}</span>
-                <p className="text-sm text-gray-500">
-                    Availability:<span className="text-blue-500">In Stock</span>
-                </p>
-                <p className="text-gray-500 mb-4 border-b">Met minim Mollie non desert Alamo est sit cliquey dolor 
-                do met sent. RELIT official consequent door ENIM RELIT Mollie. 
-                Excitation venial consequent sent nostrum met.</p>
-                <div className="flex gap-2 mt-3">
-                    <span className="w-4 h-4 rounded-full bg-blue-500 cursor-pointer transition hover:scale-125"></span>
-                    <span className="w-4 h-4 rounded-full bg-green-500 cursor-pointer transition hover:scale-125"></span>
-                    <span className="w-4 h-4 rounded-full bg-orange-500 cursor-pointer transition hover:scale-125"></span>
-                    <span className="w-4 h-4 rounded-full bg-black cursor-pointer transition hover:scale-125"></span>
-                </div>
-                <div className="flex gap-4 mt-4">
-                    <button className="flex items-center gap-2 bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
-                        Select Option
-                    </button>
-                    <button>
+                    <h1 className="text-2xl font-semibold text-gray-800">{activeProduct.name}</h1>
+                    
+                    <div className="flex items-center gap-2">
+                        <div className="flex text-yellow-400">
+                            {"★".repeat(Math.round(activeProduct.rating || 0))}
+                            {"☆".repeat(5 - Math.round(activeProduct.rating || 0))}
+                        </div>
+                        <span className="text-gray-400 text-sm font-bold">({activeProduct.sell_count} Reviews)</span>
+                    </div>
 
-                    </button>
-                    <button className="rounded-full bg-gray-50 px-2 hover:bg-gray-200 transition">
-                        <Heart size={18}/>
-                    </button>
-                    <button className="rounded-full bg-gray-50 px-2 hover:bg-gray-200 transition">
-                        <ShoppingCart />
-                    </button>
-                    <button className="rounded-full bg-gray-50 px-2 hover:bg-gray-200 transition">
-                        <Eye size={18}/>
-                    </button>
+                    <span className="text-2xl font-bold text-gray-900">{activeProduct.price} ₺</span>
+                    
+                    <p className="text-sm font-bold">
+                        Availability: 
+                        <span className={activeProduct.stock > 0 ? "text-blue-500 ml-1" : "text-red-500 ml-1"}>
+                            {activeProduct.stock > 0 ? "In Stock" : "Out of Stock"}
+                        </span>
+                    </p>
 
-                </div>
+                    <p className="text-gray-500 leading-relaxed border-b pb-6">
+                        {activeProduct.description}
+                    </p>
 
+                   
+                    <div className="flex gap-2 mt-2">
+                        <span className="w-6 h-6 rounded-full bg-[#23A6F0] cursor-pointer hover:ring-2 ring-offset-2 ring-blue-500 transition"></span>
+                        <span className="w-6 h-6 rounded-full bg-[#2DC071] cursor-pointer hover:ring-2 ring-offset-2 ring-green-500 transition"></span>
+                        <span className="w-6 h-6 rounded-full bg-[#E77C40] cursor-pointer hover:ring-2 ring-offset-2 ring-orange-500 transition"></span>
+                        <span className="w-6 h-6 rounded-full bg-[#252B42] cursor-pointer hover:ring-2 ring-offset-2 ring-black transition"></span>
+                    </div>
+
+                   
+                    <div className="flex gap-4 mt-6">
+                        <button className="bg-[#23A6F0] text-white px-8 py-3 rounded-md font-bold hover:bg-blue-600 transition shadow-md">
+                            Add to Cart
+                        </button>
+                        
+                        <div className="flex gap-2">
+                            <button className="p-3 border rounded-full hover:bg-gray-100 transition shadow-sm bg-white">
+                                <Heart size={20} className="text-[#252B42]"/>
+                            </button>
+                            <button className="p-3 border rounded-full hover:bg-gray-100 transition shadow-sm bg-white">
+                                <ShoppingCart size={20} className="text-[#252B42]" />
+                            </button>
+                            <button className="p-3 border rounded-full hover:bg-gray-100 transition shadow-sm bg-white">
+                                <Eye size={20} className="text-[#252B42]"/>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <section className="mt-12">
-                <div className="flex gap-12 border-b text-sm text-center justify-center">
-                    <button className="font-semibold border-b-2 pb-2">
-                        Description
-                    </button>
-                    <button className="font-semibold border-b-2 pb-2">Additional Info</button>
-                    <button className="font-semibold border-b-2 pb-2">Reviews (0)</button>
+
+            <section className="mt-16">
+                <div className="flex gap-8 border-b text-sm font-bold text-gray-500 justify-center">
+                    <button className="border-b-2 border-[#23A6F0] pb-4 text-[#252B42]">Description</button>
+                    <button className="pb-4 hover:text-[#252B42]">Additional Information</button>
+                    <button className="pb-4 hover:text-[#252B42]">Reviews (0)</button>
                 </div>
-                <div className="mt-6 grid md:grid-cols-3 gap-6">
-                    <img
-                        src={product.image}
-                        title={product.title} 
-                        className="
-                        max-w-[120px]
-                        sm:max-w-[160px]
-                        md:max-w-[220px]
-                        object-contain
-                        rounded
-                        "
-                    /> 
-                    <p className="text-sm mt-6 text-gray-600 text-left">Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.<br/>
-
-                    Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.<br/>
-
-                    Met minim Mollie non desert Alamo est sit cliquey dolor do met sent. RELIT official consequent door ENIM RELIT Mollie. Excitation venial consequent sent nostrum met.<br/>
-                    </p>
+                <div className="mt-10 grid md:grid-cols-2 gap-12 items-start text-left">
                     <div>
-                        <div className="text-sm text-gray-600">
-                        <h4 className="font-bold">the quick fox jumps over </h4>
-                        <ul>
-                            <li>
-                                <ChevronRight />the quick fox jumps over the lazy dog
-                            </li>
-                            <li>
-                                <ChevronRight />the quick fox jumps over the lazy dog
-                            </li>
-                            <li>
-                                <ChevronRight />the quick fox jumps over the lazy dog
-                            </li>
-                            <li>
-                                <ChevronRight />the quick fox jumps over the lazy dog
-                            </li>
-                        </ul>
+                        <h3 className="text-xl font-bold mb-4 text-[#252B42]">{activeProduct.name}</h3>
+                        <p className="text-gray-600 text-sm leading-7">
+                            {activeProduct.description} <br/><br/>
+                        </p>
                     </div>
-                    <div className="text-sm text-gray-600 mt-2">
-                        <h3 className="font-bold">the quick fox jumps over </h3>
-                        <ul>
-                            <li>
-                                <ChevronRight />the quick fox jumps over the lazy dog
-                            </li>
-                            <li>
-                                <ChevronRight />the quick fox jumps over the lazy dog
-                            </li>
-                            <li>
-                                <ChevronRight />the quick fox jumps over the lazy dog
-                            </li>
-                        </ul>
+                    <div className="bg-gray-50 p-6 rounded-lg flex justify-center">
+                        <img
+                            src={activeProduct.images?.[0]?.url}
+                            className="w-full max-w-[400px] rounded shadow-md"
+                            alt="Product Detail Section"
+                        /> 
                     </div>
-
-                    </div>
-                    
                 </div>
             </section>
-            <section>
-                <BestSellerProducts/>
-            </section>
-            <section>
-                <Brands/>
-            </section>
-        </main>
 
-    )
+            <BestSellerProducts />
+            <Brands />
+        </main>
+    );
 }
+
 export default ProductDetail;

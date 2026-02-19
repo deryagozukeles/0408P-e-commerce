@@ -9,13 +9,16 @@ import { useDispatch } from 'react-redux'
 import { fetchRolesIfNeeded } from './store/thunks/clientThunks'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { fetchCategories } from "./store/thunks/categoryThunk";
 
 
 function App() {
  const dispatch = useDispatch();
  useEffect(()=>{
   dispatch(fetchRolesIfNeeded());
+  dispatch(fetchCategories()); 
  },[dispatch]);
+ 
 
   return (
     <>

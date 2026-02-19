@@ -11,15 +11,19 @@ import Login from "../pages/LoginPage";
 function AppRouters(){
     return(
         <Switch>
+            <Route path="/shop/:gender/:categoryName/:categoryId/:productNameSlug/:productId" >
+                <ProductDetail/>
+            </Route>
             <Route path="/" exact>
                 <HomePage/>
             </Route>
             <Route path="/shop" >
                 <ShopPage/>
             </Route>
-            <Route path="/product/:id" >
-                <ProductDetail/>
+            <Route path="/shop/:gender/:categoryName/:categoryId" >
+                <ShopPage/>
             </Route>
+            
             <Route path="/contact" >
                 <Contact/>
             </Route>
@@ -35,6 +39,7 @@ function AppRouters(){
             <Route path="/login" >
                 <Login/>
             </Route>
+            
         </Switch>
     )
 
