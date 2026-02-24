@@ -119,6 +119,7 @@ function Header() {
             <NavLink to="/about" className="hover:text-blue-500 transition">About</NavLink>
             <NavLink to="/blog" className="hover:text-blue-500 transition">Blog</NavLink>
             <NavLink to="/contact" className="hover:text-blue-500 transition">Contact</NavLink>
+            <NavLink to="/team" className="hover:text-blue-500 transition">Team </NavLink>
           </nav>
 
           
