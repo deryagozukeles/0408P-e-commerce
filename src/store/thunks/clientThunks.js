@@ -18,21 +18,19 @@ export const loginUser = (formData, rememberMe, history, location) => {
   return async (dispatch) => {
     try {
       const response = await axiosInstance.post("/login", formData);
-      const { token, ...user } = response.data;  
-      dispatch(setUser(user)); 
-      axiosInstance.defaults.headers.common["Authorization"] = token;  
-      if (rememberMe) {
-        localStorage.setItem("token", token);
-      } else {
-        
-        localStorage.removeItem("token");
-      } 
+      const { token, ...user } = response.data;
+
+      dispatch(setUser(user));
+      dispatch({ type: "SET_TOKEN", payload: token }); 
+      localStorage.setItem("token", token);
+      axiosInstance.defaults.headers.common["Authorization"] = token;
       const redirectTo = location.state?.from || "/";
       history.push(redirectTo);
-      return response.data; 
+
+      return response.data;
     } catch (error) {
-      
+      console.error("Login hatası:", error);
       throw error;
     }
   };
-};
+}

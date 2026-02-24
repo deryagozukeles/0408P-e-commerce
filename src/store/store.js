@@ -14,4 +14,9 @@ const rootReducer=combineReducers({
     shoppingCart:shoppingCartReducer,
     categories: categoryReducer,
 });
-export const store=createStore(rootReducer,applyMiddleware(thunk,logger));
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk, logger)
+);
+
+export default store;

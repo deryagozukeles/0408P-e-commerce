@@ -4,7 +4,7 @@ import { createSlug } from "../utils/createSlug";
 
 function ProductCard({ product }) {
   const history = useHistory();
-
+const productImage = product.images?.[0]?.url || product.image || product.img;
   const handleProductClick = () => {
     const productNameSlug = createSlug(product.name); 
     history.push(`/shop/gender/category/${product.category_id}/${productNameSlug}/${product.id}`);
@@ -14,7 +14,7 @@ function ProductCard({ product }) {
         
         <div onClick={handleProductClick} className="group border raunded-lg owerflow-hidden hover:shadow-lg transition">
             <img
-                src={product.images?.[0]?.url}
+                src={productImage}
                 alt={product.name}
                 className="w-full h-[420px] object-cover transition-transform duration-300 group-hover:text-blue-500 "
             />

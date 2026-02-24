@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import { loginUser } from "../store/thunks/clientThunks"; // EKLENDİ
-import { toast } from "react-toastify"; // EKLENDİ
+import { loginUser } from "../store/thunks/clientThunks"; 
+import { toast } from "react-toastify"; 
 
 function Login() {
   const { register, handleSubmit, formState: { errors, isValid } } = useForm({ mode: "onChange" });
@@ -11,6 +11,7 @@ function Login() {
   const history = useHistory();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
+
 
   const onSubmit = async (data) => {
     try {
@@ -24,11 +25,10 @@ function Login() {
       setLoading(false);
     }
   };
-  const user = useSelector(state => state.client.user);
-if (user && user.name) {
-  history.push("/");
-}
+ const token = useSelector(state => state.client.token);
 
+
+console.log("LOGIN PAGE TOKEN:", token);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
       <div className="w-full max-w-md bg-white p-6 sm:p-8 rounded-xl shadow-lg">
